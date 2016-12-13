@@ -46,10 +46,10 @@ body {
     height: 100%;
 }
 .dashboard{
-    background-image:url('../images/vodafone.svg');
-    background-position: 95% 95%;
+    background-image:url('../images/dashboard.jpg');
+    background-position: center top;
     background-repeat:no-repeat;
-    background-size: 35%;
+    background-size:cover;
     height: 100%;
 }
 

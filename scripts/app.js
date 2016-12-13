@@ -1,4 +1,4 @@
-﻿angular.module('wpa2', ['ionic','nvd3'])
+﻿angular.module('wpa2', ['ionic'])
 
 .config(function ($stateProvider, $urlRouterProvider) {
 
@@ -27,29 +27,69 @@
     };
 })
 
-.controller("HomeController", function ($scope) {
+.controller("HomeController", function ($scope, $rootScope, pushNotificationService) {
 
-    // TODO add service worker code here
-    if ('serviceWorker' in navigator) {
+    if ('serviceWorker' in navigator && pushNotificationService.isPushEnabled() ) {
         navigator.serviceWorker
                  .register('scripts/service-worker.js')
-                 .then(function () { console.log('Service Worker Registered'); });
-    }
+                 .then(function (swReg) {
+                     console.log('Service Worker Registrado', swReg);
+                     window.swRegistration = swReg;
+                     pushNotificationService.initialize(swReg, function(){
+                         $rootScope.$emit("pushInitialized");
+                     });
+                 })
+                 .catch(function (error) {
+                        console.error('Service Worker Error', error);
+                 });
+
+        }
 
 })
 
 
-.controller("LeftMenuController", function ($scope) {
+.controller("LeftMenuController", function ($scope, $rootScope, pushNotificationService) {
 
     $scope.data = {
         items: []
     };
 
-    for (var i = 0; i < 7; i++) {
+    for (var i = 0; i < 5; i++) {
         $scope.data.items.push({
             id: i,
             label: "Opción " + i
         })
+    }
+
+    $scope.btnLiterals = {
+        disabled: "Mensajes Push no soportados",
+        subscribe: "Suscribirse a avisos Push",
+        showMessages: "Ver avisos",
+        unsubscribe: "Dejar de recibir avisos"
+    }
+
+    $scope.isPushEnabled = pushNotificationService.isPushEnabled();
+    $scope.isSubscribed = pushNotificationService.getUserStatus();
+
+    $rootScope.$on("pushInitialized", function () {
+        $scope.isSubscribed = pushNotificationService.getUserStatus();
+    })
+
+    $scope.subscribeUser = function () {
+        pushNotificationService.subscribeUser(function (result) {
+                setTimeout(function () {
+                    $scope.isSubscribed = true;
+                    $rootScope.$apply();
+                }, 200);
+        });
+    }
+
+    $scope.unSubscribeUser = function () {
+        console.log("El usuario ha pulsado el botón de NO suscribirse a Push");
+    }
+
+    $scope.goPushNotifications = function () {
+        console.log("El usuario ha pulsado el botón de Ver Avisos");
     }
 
 })

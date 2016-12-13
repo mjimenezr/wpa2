@@ -23,14 +23,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="directives\pwaDirectives.js" />
-    <Content Include="images\bg.jpg" />
-    <Content Include="images\bg2.jpg" />
+    <Content Include="images\dashboard.jpg" />
+    <Content Include="images\icons\push_badge.png" />
     <Content Include="images\icons\icon-128x128.png" />
     <Content Include="images\icons\icon-144x144.png" />
     <Content Include="images\icons\icon-152x152.png" />
     <Content Include="images\icons\icon-192x192.png" />
     <Content Include="images\icons\icon-256x256.png" />
     <Content Include="images\icons\icon-32x32.png" />
+    <Content Include="images\icons\push_message.png" />
+    <Content Include="images\icons\push_icon.png" />
+    <Content Include="images\icons\push_unsubscribe.png" />
     <Content Include="images\icons\vodafone_f.png" />
     <Content Include="images\vodafone.svg" />
     <Content Include="index.html" />
@@ -46,6 +49,7 @@
     <Content Include="scripts\cache-polyfill.js" />
     <Content Include="scripts\dashboardCtrl.js" />
     <Content Include="scripts\service-worker.js" />
+    <Content Include="services\pushService.js" />
     <Content Include="styles\inline.css" />
     <Content Include="styles\main.css" />
     <Content Include="templates\app.html" />

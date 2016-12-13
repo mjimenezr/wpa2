@@ -7,7 +7,24 @@
                 <img src="images/icons/icon-32x32.png" />
                 <span>Crear acceso directo</span>
             </div>
-
+            <div ng-if="isPushEnabled">
+                <div class="item" ng-show="!isSubscribed" ng-click="subscribeUser()">
+                    <img src="images/icons/push_icon.png" />
+                    <span>{{btnLiterals.subscribe}}</span>
+                </div>
+                <div class="item" ng-show="isSubscribed" ng-click="goPushNotifications()">
+                        <img src="images/icons/push_icon.png" />
+                        <span>{{btnLiterals.showMessages}}</span>
+                </div>
+                <div class="item" ng-show="isSubscribed" ng-click="unSubscribeUser()">
+                        <img src="images/icons/push_unsubscribe.png" />
+                        <span>{{btnLiterals.unsubscribe}}</span>
+                </div>
+            </div>
+            <div class="item" ng-click="talkWatson()">
+                <img src="images/icons/comunidad.png" />
+                <span>Ayuda con Watson</span>
+            </div>
 
             <div class="item" ng-repeat="item in data.items">{{item.label}}</div>
         </div>

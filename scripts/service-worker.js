@@ -16,13 +16,17 @@ importScripts('cache-polyfill.js');
 
 var dataCacheName = 'vodafoneData-v2';
 var cacheName = 'vodafonePwa';
+
+var swRegistration = {};
+
 var filesToCache = [
   '../index.html',
-  '../scripts/app.js',
-  '../directives/pwaDirectives.js',
+  'app.js',
   'dashboardCtrl.js',
+  '../services/pushService.js',
+  '../directives/pwaDirectives.js',
   '../styles/main.css',
-  '../images/vodafone.svg'
+  '../images/dashboard.jpg'
 ];
 
 self.addEventListener('install', function(e) {
@@ -92,3 +96,18 @@ self.addEventListener('fetch', function(e) {
     );
   }
 });
+
+self.addEventListener('push', function (event) {
+    console.log('[Service Worker] Mensaje Push recibido.');
+    console.log(`[Service Worker] Texto del mensaje: "${event.data.text()}"`);
+
+    const title = 'Push Demo Vodafone';
+    const options = {
+        body: 'Mensaje push recibido.',
+        icon: 'images/icons/push_message.png',
+        badge: 'images/icons/push_badge.png'
+    };
+
+    event.waitUntil(self.registration.showNotification(title, options));
+});
+
