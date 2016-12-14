@@ -69,7 +69,7 @@ angular.module('wpa2').controller('watsonCtrl', function ($scope,$timeout, $http
 
         var Headers = {
             "authorization": "Basic NGVhMzYzNDEtYWYyNC00ZmU2LWFkOGYtMzRhMGMwNGFhNzcwOmNZRG9qNmdET2NjSQ==",
-            'Content-Type': 'application/json; charset=utf-8'
+            'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
         };
                 
         var conversacion = {

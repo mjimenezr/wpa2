@@ -109,7 +109,6 @@
     }
 
     $scope.talkWatson = function () {
-        console.log("El usuario pide ayuda a Watson");
         $rootScope.wantHelp = true;
         $rootScope.partial='watson'
         //$state.go('app.help');

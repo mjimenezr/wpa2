@@ -70,7 +70,7 @@ body {
 }
 
 #inputUser {
-    width: 90%;
+    width: 85%;
     padding: 3px 1%;
     margin: 1em 1%;
     border: 1px #808080 solid;
@@ -80,12 +80,12 @@ body {
 }
 .btnSend  {
     width: 7.4%;
-    height: 3em;
+    height: 4em;
     float: right;
     cursor: pointer;
     display: inline-block;
     border-radius: 10px;
-    margin: 6px 3px 0 0;
+    margin: 1em 3px 0 0;
 }
 .userEnquiry, .answerWatson {
     width: 85%;
