@@ -4,6 +4,8 @@ angular.module('wpa2').controller('watsonCtrl', function ($scope,$timeout, $http
     //constantes de trabajo (mock)
     const WORKSPACE_ID ="195d0e47-83cf-46e9-a879-467a817691bb";		
     const URL_WATSONSVC = "https://gateway.watsonplatform.net/conversation/api/v1/workspaces/" + WORKSPACE_ID + "/message?version=2016-09-20";
+    const USERNAME = "4ea36341-af24-4fe6-ad8f-34a0c04aa770";
+    const PWD = "cYDoj6gDOccI";
     const NOMBRE_USER = "Daniel";
     const TARIFA_USER = "Vodafone One";
     const NUM_TELEF = "656003154";
@@ -68,11 +70,14 @@ angular.module('wpa2').controller('watsonCtrl', function ($scope,$timeout, $http
     function callWatsonAPI(message, context){
 
         var Headers = {
-            //"authorization": "Basic NGVhMzYzNDEtYWYyNC00ZmU2LWFkOGYtMzRhMGMwNGFhNzcwOmNZRG9qNmdET2NjSQ==",
-            'Content-Type': 'application/json; charset=utf-8'
+            "authorization": "Basic NGVhMzYzNDEtYWYyNC00ZmU2LWFkOGYtMzRhMGMwNGFhNzcwOmNZRG9qNmdET2NjSQ==",
+            'Content-Type': 'application/json; charset=utf-8',
         };
                 
         var conversacion = {
+            username: USERNAME,
+            password: PWD,
+            workspace_id: WORKSPACE_ID,
             context : context
         };
         if (message) conversacion.input = {
@@ -83,9 +88,9 @@ angular.module('wpa2').controller('watsonCtrl', function ($scope,$timeout, $http
         $http({
             method: 'POST',
             url: URL_WATSONSVC,
-            headers: Headers,
+            //headers: Headers,
             data: conversacion,
-            withCredentials: true,
+            //withCredentials: true,
             crossDomain: true,
         })
         .success(
