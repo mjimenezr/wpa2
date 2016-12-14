@@ -1,6 +1,8 @@
 ﻿angular.module('wpa2', ['ionic'])
 
-.config(function ($stateProvider, $urlRouterProvider) {
+.config(function ($stateProvider, $httpProvider, $urlRouterProvider) {
+
+    $httpProvider.defaults.useXDomain = true;
 
     $stateProvider
       .state('app', {
