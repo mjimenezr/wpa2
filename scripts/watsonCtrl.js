@@ -43,7 +43,7 @@ angular.module('wpa2').controller('watsonCtrl', function ($scope,$timeout, $http
 			
         if(!finalContext){
             var context = {
-                "Nombre": NOMBRE_USER,
+                "Name": NOMBRE_USER,
                 "Tarifa": TARIFA_USER,
                 "NumeroTelefono" : NUM_TELEF,
                 "FechaAlta" : FECHA_ALTA
