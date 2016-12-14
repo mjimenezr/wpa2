@@ -6,6 +6,9 @@ angular.module('wpa2').controller('watsonCtrl', function ($scope,$timeout, $http
     const URL_WATSONSVC = "https://gateway.watsonplatform.net/conversation/api/v1/workspaces/" + WORKSPACE_ID + "/message?version=2016-09-20";
     const NOMBRE_USER = "Daniel";
     const TARIFA_USER = "Vodafone One";
+    const NUM_TELEF = "656003154";
+    const FECHA_ALTA = "20110921";
+
     const APOLOGIES = "Disculpa, no te he entendido, aún estoy aprendiendo. Por favor, repíteme lo que necesitas de otra manera.";
     const ERRORTXT = "Error al recibir la respuesta";
     const urlRegEx = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-]*)?\??(?:[\-\+=&;%@\.\w]*)#?(?:[\.\!\/\\\w]*))?)/g;
@@ -41,7 +44,9 @@ angular.module('wpa2').controller('watsonCtrl', function ($scope,$timeout, $http
         if(!finalContext){
             var context = {
                 "Nombre": NOMBRE_USER,
-                "Tarifa": TARIFA_USER
+                "Tarifa": TARIFA_USER,
+                "NumeroTelefono" : NUM_TELEF,
+                "FechaAlta" : FECHA_ALTA
             };
             finalContext = context;
         }
@@ -121,7 +126,8 @@ angular.module('wpa2').controller('watsonCtrl', function ($scope,$timeout, $http
         initConversation=true;
     }
 		
-    function callbackKO(){
+    function callbackKO(data, status, headers) {
+        console.log("error" + JSON.stringify(data));
         var messageWatson = {
             "text" : ERRORTXT
         };
