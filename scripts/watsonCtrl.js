@@ -68,7 +68,7 @@ angular.module('wpa2').controller('watsonCtrl', function ($scope,$timeout, $http
     function callWatsonAPI(message, context){
 
         var Headers = {
-            "authorization": "Basic NGVhMzYzNDEtYWYyNC00ZmU2LWFkOGYtMzRhMGMwNGFhNzcwOmNZRG9qNmdET2NjSQ==",
+            //"authorization": "Basic NGVhMzYzNDEtYWYyNC00ZmU2LWFkOGYtMzRhMGMwNGFhNzcwOmNZRG9qNmdET2NjSQ==",
             'Content-Type': 'application/json; charset=utf-8'
         };
                 
@@ -91,9 +91,9 @@ angular.module('wpa2').controller('watsonCtrl', function ($scope,$timeout, $http
         .success(
             callbackOK
         )
-        .error(
-            callbackKO
-        );
+        .error( function(data,status, headers, config) {
+            callbackKO(data, status, headers, config)
+        });
     }
 		
     function callbackOK(data){
@@ -126,7 +126,7 @@ angular.module('wpa2').controller('watsonCtrl', function ($scope,$timeout, $http
         initConversation=true;
     }
 		
-    function callbackKO(data, status, headers) {
+    function callbackKO(data, status, headers, config) {
         console.log("error" + JSON.stringify(data));
         var messageWatson = {
             "text" : ERRORTXT
