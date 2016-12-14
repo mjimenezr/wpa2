@@ -23,10 +23,20 @@ var filesToCache = [
   '../index.html',
   'app.js',
   'dashboardCtrl.js',
+  'watsonCtrl.js',
   '../services/pushService.js',
   '../directives/pwaDirectives.js',
   '../styles/main.css',
-  '../images/dashboard.jpg'
+  '../images/dashboard.jpg',
+  '../images/icons/push_badge.png',
+  '../images/icons/push_icon.png',
+  '../images/icons/push_message.png',
+  '../images/icons/push_unsubscribe.png',
+  '../templates/app.html',
+  '../templates/dashboard.html',
+  '../templates/home.html',
+  '../templates/sidemenu.html',
+  '../templates/watson.html'
 ];
 
 self.addEventListener('install', function(e) {

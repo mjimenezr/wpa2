@@ -1,23 +1,32 @@
-<meta charset="UTF-8">
-<div id="watsonPage" class="padding_APP15">
+﻿<!DOCTYPE html>
+<meta charset="utf-8" />
 
-	<div ng-repeat="mensaje in vm.mensajes">
-		<div ng-if="mensaje.user">
-			<p> {{mensaje.text}} </p>
-		</div>
 
-		<div ng-if="!mensaje.user">
-			<p class="answerWatson" compile='mensaje.text'></p>
-		</div>
-	</div>
+<ion-view title="Ayuda con mi Vodafone">
 
-	
-	<div style="position:relative;">
-		<form ng-submit="vm.sendMessage()" handle-phone-submit >
-	    	<!--<label class="w-100_APP15"><strong>Mensaje</strong></label>-->
-			<input type="text" ng-model="vm.mensajeUsuario" id="inputUser"/>
-			<button  class="bt-edit_APP15"><i class="icon ion-edit"></i></button>
-    	</form>
-	</div>
+    <ion-content padding="true">
+        <div class="watson_banner">
+            <img src="images/watson.png" />
+        </div>
 
-</div>
+        <div ng-repeat="mensaje in mensajes">
+            <div class="userEnquiry" ng-if="mensaje.user">
+                <p> {{mensaje.text}} </p>
+            </div>
+
+            <div ng-if="!mensaje.user">
+                <p class="answerWatson" compile='mensaje.text'>{{mensaje.text}}</p>
+            </div>
+        </div>
+
+
+        <div style="position:relative;">
+            <form ng-submit="sendMessage(mensajeUsuario); mensajeUsuario=''" handle-phone-submit>
+                <input type="text" ng-model="mensajeUsuario" id="inputUser" />
+                <button class="btnSend"><i class="icon ion-edit"></i></button>
+            </form>
+        </div>
+    </ion-content>
+</ion-view>
+
+{{mensajes}}

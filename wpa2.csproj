@@ -24,6 +24,7 @@
   <ItemGroup>
     <Content Include="directives\pwaDirectives.js" />
     <Content Include="images\dashboard.jpg" />
+    <Content Include="images\icons\comunidad.png" />
     <Content Include="images\icons\push_badge.png" />
     <Content Include="images\icons\icon-128x128.png" />
     <Content Include="images\icons\icon-144x144.png" />
@@ -35,6 +36,7 @@
     <Content Include="images\icons\push_icon.png" />
     <Content Include="images\icons\push_unsubscribe.png" />
     <Content Include="images\icons\vodafone_f.png" />
+    <Content Include="images\push.png" />
     <Content Include="images\vodafone.svg" />
     <Content Include="index.html" />
     <Content Include="lib\angular-nvd3\angular-nvd3.js" />
@@ -49,6 +51,7 @@
     <Content Include="scripts\cache-polyfill.js" />
     <Content Include="scripts\dashboardCtrl.js" />
     <Content Include="scripts\service-worker.js" />
+    <Content Include="scripts\watsonCtrl.js" />
     <Content Include="services\pushService.js" />
     <Content Include="styles\inline.css" />
     <Content Include="styles\main.css" />
@@ -56,6 +59,7 @@
     <Content Include="templates\dashboard.html" />
     <Content Include="templates\home.html" />
     <Content Include="templates\sidemenu.html" />
+    <Content Include="templates\watson.html" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>

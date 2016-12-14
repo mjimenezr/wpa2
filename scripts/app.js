@@ -17,6 +17,20 @@
               }
           }
       })
+    . state('ayuda', {
+        url : "/ayuda",
+        templateUrl: 'templates/watson.html',
+        controller: 'watsonCtrl'
+    })
+     .state('app.help', {
+           url: "/watson",
+           views: {
+               'watson': {
+                   templateUrl: "templates/watson.html",
+                   controller: "watsonCtrl"
+               }
+           }
+       })       
 
     $urlRouterProvider.otherwise("/app/home");
 })
@@ -28,6 +42,8 @@
 })
 
 .controller("HomeController", function ($scope, $rootScope, pushNotificationService) {
+
+    $rootScope.partial = null;
 
     if ('serviceWorker' in navigator && pushNotificationService.isPushEnabled() ) {
         navigator.serviceWorker
@@ -48,7 +64,7 @@
 })
 
 
-.controller("LeftMenuController", function ($scope, $rootScope, pushNotificationService) {
+.controller("LeftMenuController", function ($scope, $rootScope, $state, pushNotificationService) {
 
     $scope.data = {
         items: []
@@ -92,5 +108,12 @@
         console.log("El usuario ha pulsado el botón de Ver Avisos");
     }
 
+    $scope.talkWatson = function () {
+        console.log("El usuario pide ayuda a Watson");
+        $rootScope.wantHelp = true;
+        $rootScope.partial='watson'
+        //$state.go('app.help');
+        //$state.go('help')
+    }
 })
 

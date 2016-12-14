@@ -15,3 +15,10 @@
         controller: "DashboardController"
     }
 })
+.directive("watsonChat", function () {
+    return {
+        restrict: "E",
+        templateUrl: "templates/watson.html",
+        controller: "watsonCtrl"
+    }
+})

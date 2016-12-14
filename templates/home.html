@@ -5,7 +5,8 @@
     <ion-view title="mi Vodafone">
 
         <ion-content padding="true">
-            <pwa-dashboard></pwa-dashboard>
+            <pwa-dashboard ng-if="!partial"></pwa-dashboard>
+            <watson-chat ng-if="partial=='watson'"></watson-chat>
         </ion-content>
     </ion-view>
 
