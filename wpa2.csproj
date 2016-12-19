@@ -38,6 +38,7 @@
     <Content Include="images\icons\vodafone_f.png" />
     <Content Include="images\push.png" />
     <Content Include="images\vodafone.svg" />
+    <Content Include="images\watson.png" />
     <Content Include="index.html" />
     <Content Include="lib\angular-nvd3\angular-nvd3.js" />
     <Content Include="lib\angular-nvd3\angular-nvd3.min.js" />

@@ -1,8 +1,9 @@
 ﻿angular.module('wpa2', ['ionic'])
 
-.config(function ($stateProvider, $httpProvider, $urlRouterProvider) {
+.config(function ($stateProvider, $httpProvider, $urlRouterProvider, $sceDelegateProvider) {
 
     $httpProvider.defaults.useXDomain = true;
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
     $stateProvider
       .state('app', {
@@ -35,6 +36,20 @@
        })       
 
     $urlRouterProvider.otherwise("/app/home");
+
+
+    $httpProvider.defaults.headers.common = {};
+    $httpProvider.defaults.headers.post = {};
+    $httpProvider.defaults.headers.put = {};
+    $httpProvider.defaults.headers.patch = {};
+
+    $sceDelegateProvider.resourceUrlWhitelist([
+	   'self', // Allow same origin resource loads.
+	   // Allow loading from our assets domain.  Notice the difference between * and **.
+	  'https://gateway.watsonplatform.net/**']);
+
+
+
 })
 
 .controller('AppController', function ($scope, $ionicSideMenuDelegate) {
@@ -46,6 +61,11 @@
 .controller("HomeController", function ($scope, $rootScope, pushNotificationService) {
 
     $rootScope.partial = null;
+
+    if (localStorage) {
+        console.log("localStorage en WPA2:" + localStorage.userService);
+        $rootScope.identidad = JSON.parse(localStorage.userService);
+    }
 
     if ('serviceWorker' in navigator && pushNotificationService.isPushEnabled() ) {
         navigator.serviceWorker
