@@ -51,6 +51,7 @@
     <Content Include="scripts\app.js" />
     <Content Include="scripts\cache-polyfill.js" />
     <Content Include="scripts\dashboardCtrl.js" />
+    <Content Include="scripts\pushMessageCtrl.js" />
     <Content Include="scripts\service-worker.js" />
     <Content Include="scripts\watsonCtrl.js" />
     <Content Include="services\pushService.js" />
@@ -58,6 +59,7 @@
     <Content Include="styles\main.css" />
     <Content Include="templates\app.html" />
     <Content Include="templates\dashboard.html" />
+    <Content Include="templates\pushmsg.html" />
     <Content Include="templates\home.html" />
     <Content Include="templates\sidemenu.html" />
     <Content Include="templates\watson.html" />

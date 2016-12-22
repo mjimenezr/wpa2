@@ -15,6 +15,14 @@
         controller: "DashboardController"
     }
 })
+
+.directive("messageBoard", function () {
+    return {
+        restrict: "E",
+        templateUrl: "templates/pushmsg.html",
+        controller: "pushMessagesCtrl"
+    }
+})
 .directive("watsonChat", function () {
     return {
         restrict: "E",

@@ -3,7 +3,7 @@
     var pushEnabled = false;
     var subscribed = false;
     var swReg = {};
-    const pushServerPublicKey = 'BEEX3CsIj4Srgs4CuyD4xaQ35vLV9D85_7HC2szQgaSHhLNBr6y2NW9ygX6JFqsApyNVU0GlsUA0ArCzcsqJ7_g';
+    const pushServerPublicKey = 'BGo9tardRSrMHf9Uy80SjTI23IJiGK_e39EJeJLPR8CzMnEoBc5mIE7x3ADc2ZFV9DyeobA98m6ep6H1kUrtUlU';
     const appServerPublicKey = urlB64ToUint8Array(pushServerPublicKey);
 
     function urlB64ToUint8Array(base64String) {
@@ -23,6 +23,8 @@
 
     //actualiza la suscripción push en el servidor
     function updateSubscriptionOnServer(subscription, callBack) {
+
+        console.log("[updateSubscriptionOnServer] push subscription:" +  JSON.stringify(subscription));
 
         if (typeof callBack == 'function') callBack();
 
@@ -45,9 +47,14 @@
             }
         },
 
+        getSwReg: function () {
+            return swReg;
+        },
+
         initialize : function(swRegistrationObject, callBack) {
             // Set the initial subscription value
             swReg = swRegistrationObject;
+            swReg.GCM = swReg.GCM || {};
             swReg.pushManager.getSubscription()
             .then(function(subscription) {
                 subscribed = !(subscription === null);
@@ -67,9 +74,9 @@
 
         //suscribir al usuario
         subscribeUser(callBack) {
-            swRegistration.pushManager.subscribe({
+            swReg.pushManager.subscribe({
                 userVisibleOnly: true,
-                applicationServerKey: appServerPublicKey
+                //applicationServerKey: appServerPublicKey
             })
             .then(function(subscription) {
                 console.log('Activada la suscripción del usuario:', subscription);
@@ -82,13 +89,6 @@
                 console.log('Error al suscribir al usuario a notificaciones push: ', err);
                 return null;
             });
-        },
-
-
-
-
-
-
-
+        }
     }
 })

@@ -2,11 +2,12 @@
 <meta charset="utf-8" />
 
 
-    <ion-view title="mi Vodafone">
+    <ion-view title="mi Vodafone {{partial}}">
 
         <ion-content padding="true">
             <pwa-dashboard ng-if="!partial"></pwa-dashboard>
             <watson-chat ng-if="partial=='watson'"></watson-chat>
+            <message-board ng-if="partial=='messages'"></message-board>
         </ion-content>
     </ion-view>
 

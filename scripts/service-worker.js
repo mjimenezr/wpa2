@@ -24,6 +24,7 @@ var filesToCache = [
   'app.js',
   'dashboardCtrl.js',
   'watsonCtrl.js',
+  'pushMessageCtrl.js',
   '../services/pushService.js',
   '../directives/pwaDirectives.js',
   '../styles/main.css',
@@ -33,7 +34,7 @@ var filesToCache = [
   '../images/icons/push_message.png',
   '../images/icons/push_unsubscribe.png',
   '../templates/app.html',
-  '../templates/dashboard.html',
+  '../templates/pushmsg.html',
   '../templates/home.html',
   '../templates/sidemenu.html',
   '../templates/watson.html'
@@ -109,15 +110,46 @@ self.addEventListener('fetch', function(e) {
 
 self.addEventListener('push', function (event) {
     console.log('[Service Worker] Mensaje Push recibido.');
-    console.log(`[Service Worker] Texto del mensaje: "${event.data.text()}"`);
+    console.log('[Service Worker] Texto del mensaje: ' + event.data.text());
+
+    var mesg = event.data.text();
 
     const title = 'Push Demo Vodafone';
     const options = {
-        body: 'Mensaje push recibido.',
-        icon: 'images/icons/push_message.png',
-        badge: 'images/icons/push_badge.png'
+        body: mesg,
+        icon: '../images/icons/push_message.png',
+        badge: '../images/icons/push_badge.png',
+        tag: 'viewnext-push-tag'
     };
+    var ahora = new Date().toLocaleString();
 
-    event.waitUntil(self.registration.showNotification(title, options));
+
+        self.GCM = self.GCM || [];
+        var msgOrdinal = self.GCM.length + 1;
+        var newMessage = {
+            order: msgOrdinal,
+            date: ahora,
+            title: title,
+            text: event.data.text
+        }
+
+        self.GCM.unshift(newMessage); //LIFO
+
+        const notificationPromise = self.registration.showNotification(title, options);
+        event.waitUntil(notificationPromise);
+});
+
+self.addEventListener('notificationclick', function (event) {
+    console.log('[Service Worker] El usuario pulsa sobre el mensaje.');
+
+    event.notification.close();
+    /**
+    * opcional: abre una dirección web en nueva ventana. 
+    * puesto que el service worker trabaja en el background, no podemos esperar que comunique con el contexto de la aplicación. 
+    **/
+
+    event.waitUntil(
+      clients.openWindow( self.registration.scope + 'push') //state de visualización de los mensajes
+    );
 });
 

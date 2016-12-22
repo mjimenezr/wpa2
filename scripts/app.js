@@ -25,15 +25,11 @@
         templateUrl: 'templates/watson.html',
         controller: 'watsonCtrl'
     })
-     .state('app.help', {
-           url: "/watson",
-           views: {
-               'watson': {
-                   templateUrl: "templates/watson.html",
-                   controller: "watsonCtrl"
-               }
-           }
-       })       
+    .state('push', {
+        url: "/scripts/push",
+        templateUrl: "templates/pushmsg.html",
+        controller: "pushMessagesCtrl"
+    })
 
     $urlRouterProvider.otherwise("/app/home");
 
@@ -64,12 +60,12 @@
 
     if (localStorage) {
         console.log("localStorage en WPA2:" + localStorage.userService);
-        $rootScope.identidad = JSON.parse(localStorage.userService);
+        $rootScope.identidad = (typeof localStorage.userService == 'object' ) ? JSON.parse(localStorage.userService) : {};
     }
 
     if ('serviceWorker' in navigator && pushNotificationService.isPushEnabled() ) {
         navigator.serviceWorker
-                 .register('scripts/service-worker.js')
+                 .register('scripts/service-worker.js', { insecure: true })
                  .then(function (swReg) {
                      console.log('Service Worker Registrado', swReg);
                      window.swRegistration = swReg;
@@ -78,7 +74,7 @@
                      });
                  })
                  .catch(function (error) {
-                        console.error('Service Worker Error', error);
+                        console.log('Service Worker Error', error);
                  });
 
         }
@@ -128,13 +124,12 @@
 
     $scope.goPushNotifications = function () {
         console.log("El usuario ha pulsado el botón de Ver Avisos");
+        $rootScope.partial = 'messages';
     }
 
     $scope.talkWatson = function () {
         $rootScope.wantHelp = true;
-        $rootScope.partial='watson'
-        //$state.go('app.help');
-        //$state.go('help')
+        $rootScope.partial = 'watson';
     }
 })
 
